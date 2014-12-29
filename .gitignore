@@ -29,3 +29,9 @@ node_modules
 
 #Cloud 9
 .c9/
+
+!.gitkeep
+bower_components/
+tmp
+.DS_Store
+.idea
