@@ -61,10 +61,7 @@
                         </div>
                         <br /><br />
                     </form>
-                    <pre>master = {{ master | json }}</pre>
-                    <pre>meal = {{ meal | json }}</pre>
-                    <pre>meal = {{ mealsForm.$valid | json }}</pre>
-                    
+                    <!--<pre>meal = {{ mealsForm | json }}</pre>-->
                 </div>
             </div>
             <div class="col-xs-6" ng-controller="CalculateCtrl">
@@ -93,7 +90,7 @@
     <br />
     <div class="row">
         <div class="col-xs-10 col-xs-1-offset">
-            <button class="btn btn-danger pull-right">Reset</button>
+            <button type="reset" ng-click="reset()" value="reset" class="btn btn-danger pull-right">Reset</button>
         </div>
     </div>
     <script type="text/ng-template" id="error-messages">

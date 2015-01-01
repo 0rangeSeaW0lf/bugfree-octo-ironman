@@ -1,5 +1,4 @@
 angular.module('myApp',['ngMessages']).controller('FormCtrl', function($scope,$rootScope){
-    // $scope.master = {};
     
     $scope.add = function(meal, isValid) {
         if (isValid) {
@@ -9,9 +8,14 @@ angular.module('myApp',['ngMessages']).controller('FormCtrl', function($scope,$r
     
     $scope.reset = function() {
         $scope.meal = {};
+        $scope.pristine = true;
     };
     
     $scope.reset();
+    
+    $scope.$on('resetAll', function(event) {
+		$scope.reset();
+	});
 		
 }).controller('CalculateCtrl', function($scope){
     $scope.$on('calculateCost', function(event, meal) {
@@ -24,7 +28,18 @@ angular.module('myApp',['ngMessages']).controller('FormCtrl', function($scope,$r
 		$scope.earnings.averageMealTipe = $scope.earnings.tipTotal / $scope.earnings.mealCount;
 	});
 	
+	$scope.$on('resetAll', function(event) {
+		$scope.earnings = {tipTotal: 0, mealCount: 0, averageMealTipe: 0};
+		$scope.content = false;
+	});
+	
 	$scope.earnings = {tipTotal: 0, mealCount: 0, averageMealTipe: 0};
-    
     $scope.content = false;
+    
+}).controller('ResetAll', function($scope, $rootScope) {
+    $scope.reset = function() {
+        $rootScope.$broadcast('resetAll');
+    };
+    
+    $scope.reset();
 });
