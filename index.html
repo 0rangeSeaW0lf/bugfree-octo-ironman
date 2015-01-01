@@ -11,6 +11,7 @@
     
     <script src="//code.angularjs.org/1.3.8/angular.min.js"></script>
     <script src="//code.angularjs.org/1.3.8/angular-messages.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="js/master.js"></script>
 </head>
 <body class="container-fluid">
@@ -23,79 +24,86 @@
         <div class="col-xs-10 col-xs-offset-1">
             <div class="col-xs-6 boxing">
                 <div class="row">
-                    <div class="col-xs-12 titles">
+                    <div class="col-xs-12">
                         <h2 class="text-center">Meal Details</h2>
                     </div>
                 </div>
-                <br />
+                <div class="col-xs-10 col-xs-offset-1">
+                <hr />
+                </div>
                 <div class="col-xs-10 col-xs-offset-1" ng-controller="FormCtrl">
                     <form name="mealsForm" class="form-horizontal" novalidate ng-submit="add(meal, mealsForm.$valid)">
                         <div class="form-group">
-                            <label for="baseMealPrice" class="control-label col-xs-4">Base Meal Price</label>
+                            <label for="baseMealPrice" class="control-label col-xs-5">Base Meal Price</label>
                             <div class="input-group">
                                 <div class="input-group-addon">€</div>
-                                <input type="number" name="meal" class="form-control" label="baseMealPrice" placeholder="Amount" required="" min=0 ng-model="meal.cost">
+                                <input type="number" name="cost" class="form-control input" label="baseMealPrice" placeholder="Amount" required="" min=0 ng-model="meal.cost">
                             </div>
-                            <div ng-if="mealsForm.$submitted" class="col-xs-offset-4" ng-messages="mealsForm.cost.$error" ng-messages-include="error-messages"></div>
+                            <div ng-if="mealsForm.$submitted" class="col-xs-offset-5" ng-messages="mealsForm.cost.$error" ng-messages-include="error-messages"></div>
                         </div>
                         <div class="form-group">
-                            <label for="taxRate" class="control-label col-xs-4">Tax Rate</label>
+                            <label for="taxRate" class="control-label col-xs-5">Tax Rate</label>
                             <div class="input-group">
                                 <div class="input-group-addon">%</div>
-                                <input type="number" name="tax" class="form-control" label="taxRate" required="" min=0 ng-model="meal.tax">
+                                <input type="number" name="tax" class="form-control input" label="taxRate" required="" min=0 ng-model="meal.tax">
                             </div>
-                            <div ng-if="mealsForm.$submitted" class="col-xs-offset-4" ng-messages="mealsForm.tax.$error" ng-messages-include="error-messages"></div>
+                            <div ng-if="mealsForm.$submitted" class="col-xs-offset-5" ng-messages="mealsForm.tax.$error" ng-messages-include="error-messages"></div>
                         </div>
                         <div class="form-group">
-                            <label for="tipPercentage" class="control-label col-xs-4">Tip Percentage</label>
+                            <label for="tipPercentage" class="control-label col-xs-5">Tip Percentage</label>
                             <div class="input-group">
                                 <div class="input-group-addon">%</div>
-                                <input type="number" name="tip" class="form-control" label="tipPercentage" required="" min=0 ng-model="meal.tip">
+                                <input type="number" name="tip" class="form-control input" label="tipPercentage" required="" min=0 ng-model="meal.tip">
                             </div>
-                            <div ng-if="mealsForm.$submitted" class="col-xs-offset-4" ng-messages="mealsForm.tip.$error" ng-messages-include="error-messages"></div>
+                            <div ng-if="mealsForm.$submitted" class="col-xs-offset-5" ng-messages="mealsForm.tip.$error" ng-messages-include="error-messages"></div>
                         </div>
                         <br /><br /><br /><br /><br />
-                        <div class="text-center">
+                        <div class="text-center bottom-plus">
                             <button type="submit" value="submit" class="btn btn-success">Submit</button>
                             <button type="reset" ng-click="reset()" value="reset" class="btn btn-danger">Reset</button>
                         </div>
-                        <br /><br />
+                        <br /><br /><br />
                     </form>
-                    <!--<pre>meal = {{ mealsForm | json }}</pre>-->
                 </div>
             </div>
             <div class="col-xs-6" ng-controller="CalculateCtrl">
-                    <div class="col-xs-12 boxing">
+                <div class="col-xs-12 boxing bottom">
                     <div class="col-xs-10 col-xs-offset-1">
                         <h2>Customer Charges</h2>
-                    <h4><strong>Subtotal:</strong><span ng-show="content"> {{ subtotal | currency }}</span><span ng-show="!content"> $0.00</span></h4>
-                    <h4><strong>Tip:</strong><span ng-show="content"> {{ tip | currency }}</span><span ng-show="!content"> $0.00</span></h4>
-                    <div class="row">
-                    <hr class="col-xs-6" />
-                    </div>
-                        <h4><strong>Total:</strong><span ng-show="content"> {{ subtotal + tip | currency }}</span> <span ng-show="!content"> $0.00</span></h4>
+                        <hr />
+                        <h4><strong>Subtotal:</strong> {{ subtotal | currency }}</h4>
+                        <h4><strong>Tip:</strong> {{ tip | currency }}</h4>
+                        <hr class="col-xs-6" />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4><strong>Total:</strong> {{ subtotal + tip | currency }}</h4>
+                            </div>
+                        </div>
+                        <br />
                     </div>
                 </div>
-                <div class="col-xs-12">
-                    <div class="titles">
+                <div class="col-xs-12 boxing">
+                    <div class="col-xs-10 col-xs-offset-1">
                         <h2>My Earnings Info</h2>
+                        <hr />
+                        <h4><strong>Tip Total:</strong> {{ earnings.tipTotal | currency }}</h4>
+                        <h4><strong>Meal Count:</strong> {{ earnings.mealCount }}</h4>
+                        <h4><strong>Average Tip per Meal:</strong> {{ earnings.averageMealTipe | currency}}</h4>
+                        <br />
                     </div>
-                <h4><strong>Tip Total:</strong><span ng-show="content"></span> {{ earnings.tipTotal | currency }}<span ng-show="!content"> $0.00</span></h4>
-                <h4><strong>Meal Count:</strong><span ng-show="content"></span> {{ earnings.mealCount }}<span ng-show="!content"> 0</span></h4>
-                <h4><strong>Average Tip per Meal:</strong><span ng-show="content"> {{ earnings.averageMealTipe | currency}}</span><span ng-show="!content"> $0.00</span></h4>
                 </div>
             </div>
         </div>
     </div>
     <br />
-    <div class="row">
-        <div class="col-xs-10 col-xs-1-offset">
+    <div class="row" ng-controller="ResetAll">
+        <div class="col-xs-12">
             <button type="reset" ng-click="reset()" value="reset" class="btn btn-danger pull-right">Reset</button>
         </div>
     </div>
     <script type="text/ng-template" id="error-messages">
-      <p class="bg-danger text-danger text-center rod" ng-message="required">A number is required</p>
-      <p class="bg-warning text-warning texter-center rod" ng-message="min">The amount should be greater than 0 (zero)!</p>
+      <span class="bg-danger text-danger text-center rod" ng-message="required">A number is required</span>
+      <span class="bg-warning text-warning texter-center rod" ng-message="min">The amount should be greater than 0 (zero)!</span>
     </script>
 </body>
 </html>

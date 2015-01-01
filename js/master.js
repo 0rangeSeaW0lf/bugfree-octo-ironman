@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('myApp',['ngMessages']).controller('FormCtrl', function($scope,$rootScope){
     
     $scope.add = function(meal, isValid) {
@@ -8,7 +10,6 @@ angular.module('myApp',['ngMessages']).controller('FormCtrl', function($scope,$r
     
     $scope.reset = function() {
         $scope.meal = {};
-        $scope.pristine = true;
     };
     
     $scope.reset();
@@ -18,6 +19,9 @@ angular.module('myApp',['ngMessages']).controller('FormCtrl', function($scope,$r
 	});
 		
 }).controller('CalculateCtrl', function($scope){
+    $scope.subtotal = 0;
+    $scope.tip = 0;
+    
     $scope.$on('calculateCost', function(event, meal) {
 		$scope.master = meal;
 		$scope.content = true;
@@ -31,6 +35,8 @@ angular.module('myApp',['ngMessages']).controller('FormCtrl', function($scope,$r
 	$scope.$on('resetAll', function(event) {
 		$scope.earnings = {tipTotal: 0, mealCount: 0, averageMealTipe: 0};
 		$scope.content = false;
+		$scope.subtotal = 0;
+        $scope.tip = 0;
 	});
 	
 	$scope.earnings = {tipTotal: 0, mealCount: 0, averageMealTipe: 0};
