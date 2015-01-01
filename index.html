@@ -29,7 +29,7 @@
                 </div>
                 <br />
                 <div class="col-xs-10 col-xs-offset-1" ng-controller="FormCtrl">
-                    <form name="mealsForm" class="form-horizontal" novalidate ng-submit="add(mealsForm.$valid,meal)">
+                    <form name="mealsForm" class="form-horizontal" novalidate ng-submit="add(meal, mealsForm.$valid)">
                         <div class="form-group">
                             <label for="baseMealPrice" class="control-label col-xs-4">Base Meal Price</label>
                             <div class="input-group">
@@ -71,22 +71,21 @@
                     <div class="col-xs-12 boxing">
                     <div class="col-xs-10 col-xs-offset-1">
                         <h2>Customer Charges</h2>
-                    <h4><strong>Subtotal:</strong><span ng-if="content"> </span><span ng-if="!content"> $0.00</span></h4>
-                    <h4><strong>Tip:</strong><span ng-if="content"> </span><span ng-if="!content"> $0.00</span></h4>
-                    <!--{{ tip | currency : "EUR" }}-->
+                    <h4><strong>Subtotal:</strong><span ng-show="content"> {{ subtotal | currency }}</span><span ng-show="!content"> $0.00</span></h4>
+                    <h4><strong>Tip:</strong><span ng-show="content"> {{ tip | currency }}</span><span ng-show="!content"> $0.00</span></h4>
                     <div class="row">
                     <hr class="col-xs-6" />
                     </div>
-                        <h4><strong>Total:</strong><span ng-if="content"> </span> <span ng-if="!content"> $0.00</span></h4>
+                        <h4><strong>Total:</strong><span ng-show="content"> {{ subtotal + tip | currency }}</span> <span ng-show="!content"> $0.00</span></h4>
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="titles">
                         <h2>My Earnings Info</h2>
                     </div>
-                <h4><strong>Tip Total:</strong><span ng-if="content"></span> <span ng-if="!content"> $0.00</span></h4>
-                <h4><strong>Meal Count:</strong><span ng-if="content"></span> <span ng-if="!content"> 0</span></h4>
-                <h4><strong>Average Tip per Meal:</strong><span ng-if="content"> </span><span ng-if="!content"> $0.00</span></h4>
+                <h4><strong>Tip Total:</strong><span ng-show="content"></span> {{ earnings.tipTotal | currency }}<span ng-show="!content"> $0.00</span></h4>
+                <h4><strong>Meal Count:</strong><span ng-show="content"></span> {{ earnings.mealCount }}<span ng-show="!content"> 0</span></h4>
+                <h4><strong>Average Tip per Meal:</strong><span ng-show="content"> {{ earnings.averageMealTipe | currency}}</span><span ng-show="!content"> $0.00</span></h4>
                 </div>
             </div>
         </div>
