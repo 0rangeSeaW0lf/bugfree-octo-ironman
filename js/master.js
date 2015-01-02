@@ -10,9 +10,9 @@ angular.module('myApp',['ngMessages']).controller('FormCtrl', function($scope,$r
     
     $scope.reset = function() {
         $scope.meal = {};
+        $scope.mealsForm.$setPristine();
+        $scope.mealsForm.$setUntouched();
     };
-    
-    $scope.reset();
     
     $scope.$on('resetAll', function(event) {
 		$scope.reset();
