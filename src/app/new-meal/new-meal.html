@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-xs-10 col-xs-off-set-1 col-sm-8 col-sm-offset-2">
+        <form name="mealsForm" class="form-horizontal" novalidate ng-submit="add(meal, mealsForm.$valid)">
+            <div class="form-group">
+                <label for="baseMealPrice" class="control-label">Base Meal Price</label>
+                <div class="input-group">
+                    <div class="input-group-addon">€</div>
+                    <input type="number" name="cost" class="form-control input" label="baseMealPrice" placeholder="Amount" required="" min=0 ng-model="meal.cost">
+                </div>
+                <div ng-if="mealsForm.$submitted" class="" ng-messages="mealsForm.cost.$error" ng-messages-include="error-messages"></div>
+            </div>
+            <div class="form-group">
+                <label for="taxRate" class="control-label">Tax Rate</label>
+                <div class="input-group">
+                    <div class="input-group-addon">%</div>
+                    <input type="number" name="tax" class="form-control input" label="taxRate" required="" min=0 ng-model="meal.tax">
+                </div>
+                <div ng-if="mealsForm.$submitted" class="" ng-messages="mealsForm.tax.$error" ng-messages-include="error-messages"></div>
+            </div>
+            <div class="form-group">
+                <label for="tipPercentage" class="control-label">Tip Percentage</label>
+                <div class="input-group">
+                    <div class="input-group-addon">%</div>
+                    <input type="number" name="tip" class="form-control input" label="tipPercentage" required="" min=0 ng-model="meal.tip">
+                </div>
+                <div ng-if="mealsForm.$submitted" class="" ng-messages="mealsForm.tip.$error" ng-messages-include="error-messages"></div>
+            </div>
+            <br /><br /><br /><br /><br />
+            <div class="text-center bottom-plus">
+                <button type="submit" value="submit" class="btn btn-success">Submit</button>
+                <button type="reset" ng-click="reset()" value="reset" class="btn btn-danger">Cancel</button>
+            </div>
+            <br /><br /><br />
+        </form>
+    </div>
+</div>
+<script type="text/ng-template" id="error-messages">
+  <span class="bg-danger text-danger text-center rod" ng-message="required">A number is required</span>
+  <span class="bg-warning text-warning texter-center rod" ng-message="min">The amount should be greater than 0 (zero)!</span>
+</script>

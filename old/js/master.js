@@ -42,7 +42,8 @@ angular.module('myApp',['ngMessages']).controller('FormCtrl', function($scope,$r
 	$scope.earnings = {tipTotal: 0, mealCount: 0, averageMealTipe: 0};
     $scope.content = false;
     
-}).controller('ResetAll', function($scope, $rootScope) {
+})
+.controller('ResetAll', function($scope, $rootScope) {
     $scope.reset = function() {
         $rootScope.$broadcast('resetAll');
     };
