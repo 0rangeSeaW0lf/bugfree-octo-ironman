@@ -11,7 +11,7 @@ angular.module('workspace', ['ngAnimate', 'ngSanitize', 'ngRoute', 'mgcrea.ngStr
         templateUrl: 'app/new-meal/new-meal.html',
         controller: 'NewMealCtrl'
       })
-      .when('my-earnings', {
+      .when('/my-earnings', {
         templateUrl: 'app/my-earnings/my-earnings.html',
         controller: 'EarningsCtrl'
       })
@@ -19,10 +19,8 @@ angular.module('workspace', ['ngAnimate', 'ngSanitize', 'ngRoute', 'mgcrea.ngStr
         redirectTo: '/'
       });
   })
-  .controller('ResetAll', function($scope, $rootScope) {
-    $scope.reset = function() {
-        $rootScope.$broadcast('resetAll');
-    };
-
-    $scope.reset();
+  .run(function($rootScope){
+      $rootScope.earnings = {tipTotal: 0, mealCount: 0, averageMealTipe: 0};
+      $rootScope.subtotal = 0;
+      $rootScope.tip = 0;
   });

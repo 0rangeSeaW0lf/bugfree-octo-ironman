@@ -18,7 +18,8 @@ angular.module('myApp',['ngMessages']).controller('FormCtrl', function($scope,$r
 		$scope.reset();
 	});
 		
-}).controller('CalculateCtrl', function($scope){
+})
+.controller('CalculateCtrl', function($scope){
     $scope.subtotal = 0;
     $scope.tip = 0;
     
