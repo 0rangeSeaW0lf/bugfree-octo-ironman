@@ -18,8 +18,7 @@ angular.module('workspace', ['ngAnimate', 'ngSanitize', 'ngRoute', 'mgcrea.ngStr
       .otherwise({
         redirectTo: '/'
       });
-
-      $locationProvider.html5Mode(true);
+      $locationProvider.html5Mode({ enabled: true, requireBase: false }).hashPrefix('!');
   })
   .run(function($rootScope, $location, $timeout) {
       $rootScope.$on('$routeChangeError', function() {
