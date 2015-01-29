@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workspace', ['ngAnimate', 'ngSanitize', 'ngRoute', 'mgcrea.ngStrap', 'ngMessages'])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'app/home/home.html',
@@ -18,6 +18,8 @@ angular.module('workspace', ['ngAnimate', 'ngSanitize', 'ngRoute', 'mgcrea.ngStr
       .otherwise({
         redirectTo: '/'
       });
+
+      $locationProvider.html5Mode(true);
   })
   .run(function($rootScope, $location, $timeout) {
       $rootScope.$on('$routeChangeError', function() {
